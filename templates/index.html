@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Restoration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Photo Restoration</h2>
+
+        <form method="post" action="/" enctype="multipart/form-data">
+            <input type="file" name="file" autocomplete="off" required>
+            <input type="submit" value="Restore Photo" class="button">
+        </form>
+
+        <div class="image-container">
+            {% if filename %}
+                <div>
+                    <p>Original Image:</p>
+                    <img src="{{ url_for('static', filename='images/' + filename) }}" alt="Original Image">
+                </div>
+            {% endif %}
+            {% if restored_img_url %}
+                <div>
+                    <p>Restored Image:</p>
+                    <img src="{{ restored_img_url }}" alt="Restored Image">
+                    <a href="{{ restored_img_url }}" download class="button"><i class="fas fa-download"></i> Download</a>
+                </div>
+
+            {% endif %}
+
+        
+    </div>
+</body>
+</html>
